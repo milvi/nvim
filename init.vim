@@ -24,16 +24,100 @@ colorscheme mine
 " - Avoid using standard Vim directory names like 'plugin'
 call plug#begin()
 
-
-
+" HEY, HEY, PLUG LITERALS
 " Make sure you use single quotes
 
 " === LEAN & MEAN STATUS/TABLINE FOR VIM THAT'S LIGHT AS AIR
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
+"patch builtin I A visual mode feature
+Plug 'kana/vim-niceblock'
+
+"Vim-cool disables search highlighting when you are done searching and re-enables it when you search again.
+Plug 'romainl/vim-cool'
+
+"Smooth scrolling done right
+" attention remap S-Up etc.. conflicts my own window remapped moves
+Plug 'psliwka/vim-smoothie'
+
+"git wrapper(dependency)+ git log viewer
+"Plug 'tpope/vim-fugitive'
+"Plug 'junegunn/gv.vim'
+
+"tabularize, align operators.
+" godlygeek oldest
+" junegunn cites godlygeek, it's hyper configurable
+" tommcdo made sneak + it's simple
+Plug 'godlygeek/tabular'
+"Plug 'junegunn/vim-easy-align'
+Plug 'tommcdo/vim-lion'
+
 "FAST MOTION F f T t but with s S 
 Plug 'justinmk/vim-sneak'
+
+"MORE text objects
+"engine, to create text-obj
+Plug 'kana/vim-textobj-user'
+
+"TEXTOBJ INSTANCES,PLUGINS,ADDITIONS
+"usage : ii, ai , iI, aI
+Plug 'kana/vim-textobj-indent'
+
+"A convenient text object for last pasted text
+"Convenience for `[v`] : aP
+Plug 'saaguero/vim-textobj-pastedtext'
+
+"select parameters of functions : 'a,'  (super inutile en ML LOL)
+"Plug 'sgur/vim-textobj-parameter'
+
+"Text objects for entire buffer : ie, ae
+Plug 'kana/vim-textobj-entire'
+
+"Text objects for continuity space : iS, aS
+Plug 'saihoooooooo/vim-textobj-space'
+
+"Text objects for a comment but not nesting, buggy. ac, ic
+"Plug 'thinca/vim-textobj-comment'
+"Plug 'glts/vim-textobj-comment'
+
+
+"Commentary all modes : gc
+"can be done a mano:)))))
+"Plug 'tpope/vim-commentary'
+
+"The set of operator and textobject plugins to search/select/edit sandwiched textobjects.
+"voir configuration pour le textobj
+"Plug 'machakann/vim-sandwich'
+
+"directory viewer
+Plug 'justinmk/vim-dirvish'
+
+"directory viewer async
+"Easter egg
+"Plug 'thinca/vim-portal'
+
+"Enhanced multi-file search for Vim
+"Plug 'wincent/ferret'
+
+"Helps you win at grep.
+Plug 'mhinz/vim-grepper'
+
+"Land on window you chose like tmux's 'display-pane' | Useless ?
+"Plug 't9md/vim-choosewin'
+
+"Plug 'jremmen/vim-ripgrep'
+
+"Plug 'ctrlpvim/ctrlp.vim'
+"Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+"Plug 'junegunn/fzf.vim'
+
+Plug 'thinca/vim-qfreplace'
+Plug 'sk1418/QFGrep'
+" vim-qfedit enables you to edit the qf list freely as if it were a normal
+" buffer. BREAKS QF IN VIM-GREPPER ? Weird behaviour for normal mode
+"Plug 'itchyny/vim-qfedit'
+
 
 " === PERFORM ALL YOUR VIM INSERT MODE COMPLETIONS WITH TAB
 "Plug 'ervandew/supertab'
@@ -126,7 +210,6 @@ Plug 'neovimhaskell/haskell-vim'
 "Plug 'eagletmt/ghcmod-vim'
 "Plug 'Shougo/vimproc.vim', {'do' : 'make'}
 
-Plug 'godlygeek/tabular'
 
 
 " Initialize plugin system
@@ -134,15 +217,69 @@ call plug#end()
 
 "=== END OF PLUGS
 
-
-
-
-
 " Always draw the signcolumn.
 set signcolumn=yes
 
 "from vimcompletesme
 set completeopt+=longest
+
+" set relativenumber
+set number
+
+let mapleader = ","
+
+
+
+let g:fzf_preview_window = ''
+
+
+" CONFIG choosewin
+" invoke with '-'
+"nmap  +  <Plug>(choosewin)
+" if you want to use overlay feature
+"let g:choosewin_overlay_enable = 1
+
+
+let g:FerretQFOptions=0
+let g:FerretMap = 0
+let g:FerretQFMap = 0
+
+"let g:lion_squeeze_spaces = 0
+"let g:lion_map_right = 'gl'
+"let g:lion_map_left = 'gL'
+
+"text objects all plugins
+"let g:vim_textobj_parameter_mapping = ','
+let g:pastedtext_select_key = 'aP'
+let g:textobj_sandwich_no_default_key_mappings = 1
+"omap ix <Plug>(textobj-sandwich-auto-i)
+"xmap ix <Plug>(textobj-sandwich-auto-i)
+"omap ax <Plug>(textobj-sandwich-auto-a)
+"xmap ax <Plug>(textobj-sandwich-auto-a)
+
+
+"vim-grepper
+" -buffer, -buffers
+nnoremap <leader>* :Grepper -tool rg -cword -noprompt -buffer<cr>
+nnoremap <leader>g :Grepper -tool rg -buffer<cr>
+nnoremap <leader>G :Grepper -tool rg<cr>
+nmap gs <plug>(GrepperOperator)
+xmap gs <plug>(GrepperOperator)
+
+" Optional. The default behaviour should work for most users.
+let g:grepper               = {}
+let g:grepper.tools         = ['rg','git']
+let g:grepper.operator      = {}
+let g:grepper.operator.buffer = 1
+"let g:grepper.simple_prompt = 1
+
+
+
+
+
+
+
+
 
 
 let g:haskell_enable_quantification = 1   " to enable highlighting of `forall`
@@ -164,7 +301,7 @@ let g:haskell_classic_highlighting = 1
 "FAST MOTION
 let g:sneak#label = 1
 let g:sneak#use_ic_scs = 1
-let g:sneak#target_labels = ";sftunq/SFGHLTUNRMQZ?0éèçà§œŒ"
+let g:sneak#target_labels = ";sftunq/SFGHLTUNRMQZ?0éèçà§œŒù¹²"
 
 "DEBUGGING VARIABLES, DEBUG MODE FOR NVIM
  " only affects the verbosity of Neoformat
@@ -391,10 +528,7 @@ inoremap <C-k> <Esc>:m .-2<CR>==gi
 vnoremap <C-j> :m '>+1<CR>gv=gv
 vnoremap <C-k> :m '<-2<CR>gv=gv
 
-" set relativenumber
-set number
 
-let mapleader = ","
 
 " Clean Search
 "elle existe déjà" command C let @/=""
@@ -417,7 +551,7 @@ nmap <silent> <A-Right> :wincmd l<CR>
 "map <F5> <C-W>_<C-W><Bar>
 
 "highlight current line
-nnoremap <Leader>h :set cursorline!<CR>
+nnoremap <Leader>c :set cursorline!<CR>
 
 " voir hi ColorColumn
 set colorcolumn=84
@@ -438,7 +572,7 @@ set colorcolumn=84
 " set hlsearch!
 " ...
 " nnoremap <F3> :set hlsearch!<CR>
-nnoremap <Leader>o :nohlsearch<CR>
+nnoremap <Leader>h :nohlsearch<CR>
 
 " remapped Shift-Tab so I could easily insert real tabs at the beginning of the line
 "inoremap <S-Tab> <C-V><Tab>
@@ -540,7 +674,7 @@ set fillchars-=vert:\| | set fillchars+=vert:\
 "=== CHAR SWAPPING ===
 "To use gc to swap the current character with the next, without changing the cursor position:
 nnoremap <silent> gr xph
-nnoremap <silent> gl Xp
+nnoremap <silent> gR Xp
 
 "To use gw to swap the current word with the next, without changing cursor position
 "nnoremap <silent> gw "_yiw:s/\(\%#\w\+\)\(\_W\+\)\(\w\+\)/\3\2\1/<CR><c-o><c-l>:nohlsearch<CR>
@@ -788,5 +922,10 @@ vmap <leader>: :Tabularize /::<CR>
 "map <silent> tc :GhcModSplitFunCase<CR>
 "map <silent> tq :GhcModeType<CR>
 "map <silent> te :GhcModeTypeClear<CR>
+
+
+
+vnoremap <M-/> <Esc>/\%V
+nnoremap <M-/> /\%V
 
 " FIN
