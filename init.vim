@@ -61,17 +61,50 @@ Plug 'kien/rainbow_parentheses.vim'
 " Multi-entry selection UI.
 " Plug 'junegunn/fzf'
 
+Plug 'mhinz/vim-grepper'
+Plug 'itchyny/vim-qfedit'
+Plug 'wincent/ferret'
+
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
 " Initialize plugin system
 call plug#end()
 
 "=== END OF PLUGS
 
 
+
+let mapleader = ","
+
 " Always draw the signcolumn.
 set signcolumn=yes
 
 "from vimcompletesme
 set completeopt+=longest
+
+
+
+
+
+
+
+
+" itchyny/vim-qfedit toggle, defaults to 1
+"let g:qfedit_enable	= 0
+
+
+nnoremap <leader>g :Grepper -tool rg<cr>
+nnoremap <leader>G :Grepper -tool rg -buffers<cr>
+nnoremap <leader>* :Grepper -tool rg -cword -noprompt<cr>
+
+nmap gs <plug>(GrepperOperator)
+xmap gs <plug>(GrepperOperator)
+
+" Optional. The default behaviour should work for most users.
+let g:grepper               = {}
+let g:grepper.tools         = ['rg']
+let g:grepper.simple_prompt = 1
+let g:grepper.highlight     = 1
 
 
 let g:haskell_enable_quantification = 1   " to enable highlighting of `forall`
@@ -240,7 +273,6 @@ vnoremap <C-k> :m '<-2<CR>gv=gv
 " set relativenumber
 set number
 
-let mapleader = ","
 
 " reindet buffer
 map <Leader>i mzgg=G`z
