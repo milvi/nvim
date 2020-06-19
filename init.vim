@@ -162,7 +162,7 @@ Plug 'https://github.com/eagletmt/neco-ghc'
 " === utilise ocamlformat et ocp-indent pour formater
 Plug 'sbdchd/neoformat'
 
-" === vim-ocaml syntax files for vim/neovim
+" === OCAML            vim-ocaml syntax files for vim/neovim
 Plug 'ocaml/vim-ocaml'
 
 " === LSP Language Server Protocol support
@@ -171,9 +171,8 @@ Plug 'autozimu/LanguageClient-neovim', {
     \ 'do': 'bash install.sh',
     \ }
 
-" (Optional) Multi-entry selection UI.
-" Plug 'junegunn/fzf'
-
+" === FSHARP            (dépend binaires ds le PATH)
+" ide, incomplet, dépendance à configurer
 Plug 'ionide/Ionide-vim', {
       \ 'do':  'make fsautocomplete',
       \}
@@ -203,7 +202,8 @@ Plug 'alx741/vim-hindent'
 " ghcid buffer for neovim, broken , :Ghcid -c \\"stack repl" , wtf ?
 "Plug 'ndmitchell/ghcid', { 'rtp': 'plugins/nvim' }
 
-"HASKELL syntax files
+" === HASKELL syntax files       (dépend nombreux binaires ds le PATH)
+" indentation , syntax files
 Plug 'neovimhaskell/haskell-vim'
 
 "funky bonus haskell
@@ -272,12 +272,13 @@ let g:grepper.tools         = ['rg','git']
 let g:grepper.operator      = {}
 let g:grepper.operator.buffer = 1
 "let g:grepper.simple_prompt = 1
+let g:grepper.highlight     = 1
 
 
 
 
-
-
+" itchyny/vim-qfedit toggle, defaults to 1
+"let g:qfedit_enable	= 0
 
 
 
@@ -308,6 +309,9 @@ let g:sneak#target_labels = ";sftunq/SFGHLTUNRMQZ?0éèçà§œŒù¹²"
 "let g:neoformat_verbose = 1
 " also increases verbosity of the editor as a whole
 "let &verbose            = 1
+" necoghc diagnosis via :necoghcdiag<tab>
+"let g:necoghc_debug = 1
+
 
 let g:neoformat_ocaml_ocamlformat = {
             \ 'exe': 'ocamlformat',
@@ -428,8 +432,6 @@ nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
 "nnoremap <silent> gf :call LanguageClient#textDocument_formatting()<CR>
 
 
-" my own tweaks
-"
 " recommended by Syntastic plugin but how does it do ? 
 "set statusline+=%#warningmsg#
 "set statusline+=%{SyntasticStatuslineFlag()}
@@ -518,7 +520,6 @@ if has('langmap') && exists('+langnoremap')
   set langnoremap
 endif
 
-
 " Moving lines up or down 
 " In normal mode or in insert mode, press Alt-j to move the current line down, or press Alt-k to move the current line up.
 nnoremap <C-j> :m .+1<CR>==
@@ -539,7 +540,7 @@ map <Leader>i mzgg=G`z
 " Switch between Vim window splits easily
 " Alt+arrow Navigation
 " Alt+leftarrow will go one window left, etc.
-" Alt A-* Shift S-*
+" Alt-* = A-* et Maj/Shift = S-*
 nmap <silent> <A-Up> :wincmd k<CR>
 nmap <silent> <A-Down> :wincmd j<CR>
 nmap <silent> <A-Left> :wincmd h<CR>
@@ -554,7 +555,7 @@ nmap <silent> <A-Right> :wincmd l<CR>
 nnoremap <Leader>c :set cursorline!<CR>
 
 " voir hi ColorColumn
-set colorcolumn=84
+set colorcolumn=86
 
 " :noh
 " or :nohlsearch to temporarily disable search highlighting until the next search.
@@ -841,8 +842,6 @@ execute "set rtp+=" . g:opamshare . "/merlin/vim"
 
 
 "set rtp^="/home/milvi/.opam/system/share/ocp-indent/vim"
-" opamshare previously definied
-" pour tout opam switch env
 execute "set rtp^=" . g:opamshare . "/ocp-indent/vim"
 "autocmd FileType ocaml source /home/milvi/.opam/system/share/ocp-indent/vim/indent/ocaml.vim
 
@@ -862,12 +861,11 @@ let g:syntastic_haskell_checkers = ['']
 
 let maplocalleader="\_"
 
-"au Syntax ocaml runtime! syntax/ocaml.vim
 
 
 "neoformat key binding
 nnoremap <leader>f :Neoformat<CR>
-"can't format intervals"
+"can't format intervals it's broken. useless mapping
 vnoremap <silent> <leader>f :Neoformat<CR>
 
 "Fsharp tooltips (show)
@@ -881,6 +879,7 @@ if has('nvim') && exists('*nvim_open_win')
 endif
 
 "let g:necoghc_debug = 1
+
 " Disable haskell-vim omnifunc
 let g:haskellmode_completion_ghc = 0
 "[broken by autozimu redefinition] 
@@ -888,12 +887,16 @@ let g:haskellmode_completion_ghc = 0
 autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
 "has to be manually reinvoked
 autocmd FileType haskell nnoremap <buffer> <localleader>c :setlocal omnifunc=necoghc#omnifunc<CR>
+
 "how to enable neco-ghc with VimCompletesMe
 "(woops, wrong plugin!)let g:ycm_semantic_triggers = {'haskell' : ['.']}
 "autocmd Filetype haskell let b:vcm_tab_complete = 'omni'
 let b:vcm_tab_complete = 'omni'
-"neco_ghc broken ?? wtf
+"neco_ghc broken ?? wtf . pourquoi j'ai fait ce commentaire ? sur vcm ???
 
+
+" autocmd FileType haskell OU à-la-main échoue.
+" LanguageClient fait omnifunc=LanguageClient#complete
 "if (&ft=='haskell')
 "    :setlocal omnifunc=necoghc#omnifunc
 "endif
