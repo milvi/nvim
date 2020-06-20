@@ -6,15 +6,6 @@ set clipboard+=unnamedplus,unnamed
 set showmatch
 set matchtime=3
 
-" Theme ; ordonnancement et appel complexe des fichiers d'initialisation ;
-" https://neovim.io/doc/user/options.html#'runtimepath'
-" https://neovim.io/doc/user/starting.html#$VIMRUNTIME
-" https://neovim.io/doc/user/syntax.html#:colorscheme
-" https://neovim.io/doc/user/syntax.html#syncolor
-" https://neovim.io/doc/user/syntax.html#syntax
-" https://neovim.io/doc/user/usr_06.html
-" :hi highlight et voisinage des entrées ci-dessus
-"
 "syntax enable
 colorscheme mine
 
@@ -53,7 +44,7 @@ Plug 'godlygeek/tabular'
 "Plug 'junegunn/vim-easy-align'
 Plug 'tommcdo/vim-lion'
 
-"FAST MOTION F f T t but with s S 
+"fast motion F f T t but with s S 
 Plug 'justinmk/vim-sneak'
 
 "MORE text objects
@@ -87,7 +78,7 @@ Plug 'saihoooooooo/vim-textobj-space'
 "Plug 'tpope/vim-commentary'
 
 "The set of operator and textobject plugins to search/select/edit sandwiched textobjects.
-"voir configuration pour le textobj
+"voir configuration pour ce textobj
 "Plug 'machakann/vim-sandwich'
 
 "directory viewer
@@ -97,7 +88,7 @@ Plug 'justinmk/vim-dirvish'
 "Easter egg
 "Plug 'thinca/vim-portal'
 
-"Enhanced multi-file search for Vim
+"Enhanced multi-file search for Vim, old, twice vim-grepper
 "Plug 'wincent/ferret'
 
 "Helps you win at grep.
@@ -106,25 +97,20 @@ Plug 'mhinz/vim-grepper'
 "Land on window you chose like tmux's 'display-pane' | Useless ?
 "Plug 't9md/vim-choosewin'
 
-"Plug 'jremmen/vim-ripgrep'
-
-"Plug 'ctrlpvim/ctrlp.vim'
 "Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 "Plug 'junegunn/fzf.vim'
 
+"creates new modifiable buffer off quickfix and save to map changes wherever
 Plug 'thinca/vim-qfreplace'
+"in-quickfix filter
 Plug 'sk1418/QFGrep'
 " vim-qfedit enables you to edit the qf list freely as if it were a normal
-" buffer. BREAKS QF IN VIM-GREPPER ? Weird behaviour for normal mode
+" buffer. BREAKS QF IN VIM-GREPPER ? Weird behaviour for normal mode anyway
 "Plug 'itchyny/vim-qfedit'
 
 
-" === PERFORM ALL YOUR VIM INSERT MODE COMPLETIONS WITH TAB
-"Plug 'ervandew/supertab'
-
 "Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 "Plug 'https://github.com/copy/deoplete-ocaml'
-
 
 "Plug 'https://github.com/dense-analysis/ale'
 
@@ -134,25 +120,17 @@ Plug 'https://github.com/ajh17/VimCompletesMe'
 "Haskell completion engine
 Plug 'https://github.com/eagletmt/neco-ghc'
 
+" === SLOW ?? OU FSHARP ?? CACAACACA !
+" === C'EST AU CHARGEMENT POUR F#
 "Plug 'fsharp/vim-fsharp', {
 "      \ 'for': 'fsharp',
 "      \ 'do':  'make fsautocomplete',
 "      \}
 
-" === SLOW ?? OU FSHARP ?? CACAACACA !
-" === C'EST AU CHARGEMENT POUR F#
-"Plug 'vim-syntastic/syntastic'
-
-" === DÉPENDANCE POUR SYNTASTIC ??
-"Plug 'tpope/vim-fugitive'
-
 " === RAINBOW PARENTHESIS FOR LISP ()()()((((())()(()))))
-"Plug 'amdt/vim-niji'
+Plug 'amdt/vim-niji'
 "Plug 'kien/rainbow_parentheses.vim'
 
-
-" === FAST MOTION ===
-"Plug 'easymotion/vim-easymotion'
 
 " === OCAML, integration of ocp-indent ===
 " doesn't it conflict with neoformat ??
@@ -195,10 +173,6 @@ Plug 'alx741/vim-hindent'
 "Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 
-" (Optional) Multi-entry selection UI.
-"Plug 'junegunn/fzf'
-
-
 " ghcid buffer for neovim, broken , :Ghcid -c \\"stack repl" , wtf ?
 "Plug 'ndmitchell/ghcid', { 'rtp': 'plugins/nvim' }
 
@@ -229,7 +203,6 @@ set number
 let mapleader = ","
 
 
-
 let g:fzf_preview_window = ''
 
 
@@ -256,6 +229,7 @@ let g:textobj_sandwich_no_default_key_mappings = 1
 "xmap ix <Plug>(textobj-sandwich-auto-i)
 "omap ax <Plug>(textobj-sandwich-auto-a)
 "xmap ax <Plug>(textobj-sandwich-auto-a)
+
 
 
 "vim-grepper
