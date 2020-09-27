@@ -231,6 +231,7 @@ let g:textobj_sandwich_no_default_key_mappings = 1
 "xmap ax <Plug>(textobj-sandwich-auto-a)
 
 
+"niji rainbow lisp plugin
 let g:niji_use_legacy_colours = 1
 
 
