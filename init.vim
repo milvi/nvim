@@ -128,8 +128,8 @@ Plug 'https://github.com/eagletmt/neco-ghc'
 "      \}
 
 " === RAINBOW PARENTHESIS FOR LISP ()()()((((())()(()))))
-Plug 'amdt/vim-niji'
-"Plug 'kien/rainbow_parentheses.vim'
+"Plug 'amdt/vim-niji'
+Plug 'kien/rainbow_parentheses.vim'
 
 
 " === OCAML, integration of ocp-indent ===
@@ -231,6 +231,8 @@ let g:textobj_sandwich_no_default_key_mappings = 1
 "xmap ax <Plug>(textobj-sandwich-auto-a)
 
 
+let g:niji_use_legacy_colours = 1
+
 
 "vim-grepper
 " -buffer, -buffers
@@ -246,7 +248,6 @@ let g:grepper.tools         = ['rg','git']
 let g:grepper.operator      = {}
 let g:grepper.operator.buffer = 1
 "let g:grepper.simple_prompt = 1
-let g:grepper.highlight     = 1
 
 
 
