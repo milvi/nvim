@@ -6,7 +6,7 @@
 "  syntax reset
 "endif
 
-let g:colors_name = "mine"
+let g:colors_name = "mine_colors"
 
 " ==== START HIGHLIGHT GROUPS ====
 
@@ -139,11 +139,10 @@ hi Underlined	term=underline cterm=underline ctermfg=LightBlue gui=underline gui
 hi Ignore	term=NONE cterm=NONE ctermfg=black ctermbg=NONE gui=NONE guifg=#8c8a8b guibg=NONE
 
 hi Statement	term=bold cterm=NONE,bold ctermfg=42 ctermbg=NONE gui=NONE guifg=#8b4726 guibg=NONE
-
-hi Type		term=underline cterm=NONE,bold ctermfg=33 ctermbg=NONE gui=NONE guifg=#ef7b08 guibg=NONE
+hi Type		term=underline cterm=NONE,bold ctermfg=33 ctermbg=NONE gui=NONE guifg=#da9203 guibg=NONE
 hi Identifier	term=underline cterm=bold ctermfg=Cyan ctermbg=NONE gui=NONE guifg=#ea4335 guibg=NONE
 hi Function gui=NONE guifg=#4285f4
-hi Keyword guifg=#005fff  
+hi Keyword guifg=#34a853  
 
 " #da9203 orange
 " #4285f4 bleu
@@ -152,10 +151,6 @@ hi Keyword guifg=#005fff
 " 
 " #8b4726 marron
 "
-
-" nouveau orange caml #ed6f0c #ef7b08
-" nouveau bleu  #005fff
-
 " orange special ff8700(trop clair)
 " bleu function guifg=#0073e5
 " gris keyword guifg=#383838              

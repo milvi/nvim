@@ -35,10 +35,10 @@ Plug 'vim-airline/vim-airline-themes'
 " === PERFORM ALL YOUR VIM INSERT MODE COMPLETIONS WITH TAB
 Plug 'ervandew/supertab'
 
-Plug 'fsharp/vim-fsharp', {
-      \ 'for': 'fsharp',
-      \ 'do':  'make fsautocomplete',
-      \}
+"Plug 'fsharp/vim-fsharp', {
+"      \ 'for': 'fsharp',
+"      \ 'do':  'make fsautocomplete',
+"      \}
 
 " === SLOW ?? OU FSHARP ??
 " === C'EST AU CHARGEMENT POUR F#
@@ -55,19 +55,111 @@ Plug 'kien/rainbow_parentheses.vim'
 " === FAST MOTION ===
 Plug 'easymotion/vim-easymotion'
 
-" === OCAML INDENT INTEGRATION ===
-"Plug 'https://github.com/let-def/ocp-indent-vim.git'
+
+" === utilise ocamlformat et ocp-indent pour formater
+Plug 'sbdchd/neoformat'
+
+" === vim-ocaml syntax files for vim/neovim
 Plug 'ocaml/vim-ocaml'
+
+" === LSP Language Server Protocol support
+Plug 'autozimu/LanguageClient-neovim', {
+    \ 'branch': 'next',
+    \ 'do': 'bash install.sh',
+    \ }
+
+" (Optional) Multi-entry selection UI.
+" Plug 'junegunn/fzf'
+
+Plug 'ionide/Ionide-vim', {
+      \ 'do':  'make fsautocomplete',
+      \}
+
+" ghcid buffer for neovim, broken ? can't invoke, wtf
+"Plug 'ndmitchell/ghcid', { 'rtp': 'plugins/nvim' }
+
+
+Plug 'neovimhaskell/haskell-vim'  "indentation , syntax files
+
 
 " Initialize plugin system
 call plug#end()
 
 "=== END OF PLUGS
 
+let g:haskell_enable_quantification = 1   " to enable highlighting of `forall`
+let g:haskell_enable_recursivedo = 1      " to enable highlighting of `mdo` and `rec`
+let g:haskell_enable_arrowsyntax = 1      " to enable highlighting of `proc`
+let g:haskell_enable_pattern_synonyms = 1 " to enable highlighting of `pattern`
+let g:haskell_enable_typeroles = 1        " to enable highlighting of type roles
+let g:haskell_enable_static_pointers = 1  " to enable highlighting of `static`
+let g:haskell_backpack = 1                " to enable highlighting of backpack keywords
+let g:haskell_classic_highlighting = 1
+"let g:haskell_indent_disable = 1
+
+
+
+"DEBUG MODE
+ " only affects the verbosity of Neoformat
+"let g:neoformat_verbose = 1
+" also increases verbosity of the editor as a whole
+"let &verbose            = 1
+
+let g:neoformat_ocaml_ocamlformat = {
+            \ 'exe': 'ocamlformat',
+            \ 'no_append': 1,
+            \ 'stdin': 1,
+            \ 'args': ['--enable-outside-detected-project', '--name', '"%:p"', '-']
+            \ }
+
+" Configuration and activation of ocamlformat+ocp-indet for neoformat
+let g:neoformat_enabled_ocaml = ['ocamlformat']
+" si non défini, le premier trouvé ou erreur
+let g:neoformat_enabled_haskell = ['ormolu']
+
+"let g:ormolu_ghc_opt=["TypeApplications", \\\\\\\""""\"RankNTypes"]
+
 " Configuration variables for vim-airline
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#formatter = 'default'
-let g:airline_powerline_fonts = 1
+"let g:airline_powerline_fonts = 1
+if !exists('g:airline_symbols')
+let g:airline_symbols = {}
+endif
+
+" unicode symbols
+let g:airline_left_sep = '»'
+let g:airline_left_sep = '▶'
+let g:airline_right_sep = '«'
+let g:airline_right_sep = '◀'
+let g:airline_symbols.crypt = '🔒'
+let g:airline_symbols.linenr = '☰'
+let g:airline_symbols.linenr = '␊'
+let g:airline_symbols.linenr = '␤'
+let g:airline_symbols.linenr = '¶'
+let g:airline_symbols.maxlinenr = ''
+let g:airline_symbols.maxlinenr = '㏑'
+let g:airline_symbols.branch = '⎇'
+let g:airline_symbols.paste = 'ρ'
+let g:airline_symbols.paste = 'Þ'
+let g:airline_symbols.paste = '∥'
+let g:airline_symbols.spell = 'Ꞩ'
+let g:airline_symbols.notexists = 'Ɇ'
+let g:airline_symbols.whitespace = 'Ξ'
+
+" powerline symbols
+let g:airline_left_sep = ''
+let g:airline_left_alt_sep = ''
+let g:airline_right_sep = ''
+let g:airline_right_alt_sep = ''
+let g:airline_symbols.branch = ''
+let g:airline_symbols.readonly = ''
+let g:airline_symbols.linenr = '☰'
+let g:airline_symbols.maxlinenr = ''
+let g:airline_symbols.dirty='☇'
+
+
+
 let g:airline_theme = 'light'
 let g:airline_highlighting_cache = 1
 "let g:airline_extensions = [] "select extensions to be loaded
@@ -108,13 +200,37 @@ let g:fsharp_map_fsiinput = 'l'
 let g:fsharp_map_fsisendline = 'e'
 let g:fsharp_map_fsisendsel = 'e'
 
+let g:LanguageClient_rootMarkers = ['*.cabal', 'stack.yaml']
+let g:LanguageClient_serverCommands = {
+    \ 'rust': ['rls'],
+    \ 'haskell': ['ghcide', '--lsp'],
+    \ 'ocaml': ['ocamllsp'],
+    \ }
+
+" bindings pour LSP client LanguageClient-neovim (in rust, autozimu)
+nnoremap <F5> :call LanguageClient_contextMenu()<CR>
+" Or map each action separately
+nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
+nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
+nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
+
+
 
 
 
 " my own tweaks
 "
-"
-" 
+
+" recommended by Syntastic plugin but how does it do ? 
+"set statusline+=%#warningmsg#
+"set statusline+=%{SyntasticStatuslineFlag()}
+"set statusline+=%*
+" .... and this .... 
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
 
 
 
@@ -484,11 +600,18 @@ execute "set rtp+=" . g:opamshare . "/merlin/vim"
 
 
 "set rtp^="/home/milvi/.opam/system/share/ocp-indent/vim"
+<<<<<<< HEAD
 " opanshare previously definied
+=======
+" opamshare previously definied
+>>>>>>> 00f7e1aeb570618c0b69264c47f9b7a8b0e15d07
 " pour tout opam switch env
 execute "set rtp^=" . g:opamshare . "/ocp-indent/vim"
 "autocmd FileType ocaml source /home/milvi/.opam/system/share/ocp-indent/vim/indent/ocaml.vim
 
+" opam install ocp-index 
+" set rtp+=/home/milvi/.opam/4.08.1/share/ocp-index/vim
+execute "set rtp^=" . g:opamshare . "/ocp-index/vim"
 
 " " LAST LINE
 "" should appear last, after loading package or plugin
@@ -502,4 +625,10 @@ let maplocalleader="\_"
 "au Syntax ocaml runtime! syntax/ocaml.vim
 
 
+"neoformat key binding
+nnoremap <leader>f :Neoformat<CR>
+"can't format intervals"vnoremap <silent> <leader>f :Neoformat<CR>
+
+
+"let g:ghcid_command= 'ghcid --command="stack repl"'
 " FIN
