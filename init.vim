@@ -91,6 +91,10 @@ Plug 'justinmk/vim-dirvish'
 "Enhanced multi-file search for Vim, old, twice vim-grepper
 "Plug 'wincent/ferret'
 
+"Use RipGrep in Vim and display results in a quickfix list
+"Very very simple. 
+"Plug 'jremmen/vim-ripgrep'
+
 "Helps you win at grep.
 Plug 'mhinz/vim-grepper'
 
@@ -108,6 +112,12 @@ Plug 'sk1418/QFGrep'
 " buffer. BREAKS QF IN VIM-GREPPER ? Weird behaviour for normal mode anyway
 "Plug 'itchyny/vim-qfedit'
 
+
+"Elegant buffer explorer - takes very little screen space
+Plug 'weynhamz/vim-plugin-minibufexpl'
+
+"BufExplorer
+Plug 'jlanzarotta/bufexplorer'
 
 "Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 "Plug 'https://github.com/copy/deoplete-ocaml'
@@ -901,8 +911,26 @@ vmap <leader>: :Tabularize /::<CR>
 "map <silent> te :GhcModeTypeClear<CR>
 
 
-
+"The \%V atom will restrict a pattern so that it matches only inside the visual selection e.g. 
+"music amuse fuse refuse 
+"Visual select 'amuse fuse'
+":s/\%Vus/az/g
+"music amaze faze refuse
+"In order to actually search within the visual selection, you will need to use the \%V atom
 vnoremap <M-/> <Esc>/\%V
 nnoremap <M-/> /\%V
+
+nnoremap [b :bprevious
+nnoremap [B :bfirst
+nnoremap ]b :bnext
+nnoremap ]B :blast
+nnoremap [l :lprevious
+nnoremap [L :lfirst
+nnoremap ]l :lnext
+nnoremap ]L :llast
+nnoremap [q :cprevious
+nnoremap [Q :cfirst
+nnoremap ]q :cnext
+nnoremap ]Q :clast
 
 " FIN
