@@ -6,6 +6,15 @@ set clipboard+=unnamedplus,unnamed
 set showmatch
 set matchtime=3
 
+" Theme ; ordonnancement et appel complexe des fichiers d'initialisation ;
+" https://neovim.io/doc/user/options.html#'runtimepath'
+" https://neovim.io/doc/user/starting.html#$VIMRUNTIME
+" https://neovim.io/doc/user/syntax.html#:colorscheme
+" https://neovim.io/doc/user/syntax.html#syncolor
+" https://neovim.io/doc/user/syntax.html#syntax
+" https://neovim.io/doc/user/usr_06.html
+" :hi highlight et voisinage des entrées ci-dessus
+"
 "syntax enable
 colorscheme mine
 
@@ -15,133 +24,46 @@ colorscheme mine
 " - Avoid using standard Vim directory names like 'plugin'
 call plug#begin()
 
-" HEY, HEY, PLUG LITERALS
+
+
 " Make sure you use single quotes
 
 " === LEAN & MEAN STATUS/TABLINE FOR VIM THAT'S LIGHT AS AIR
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
-"patch builtin I A visual mode feature
-Plug 'kana/vim-niceblock'
-
-"Vim-cool disables search highlighting when you are done searching and re-enables it when you search again.
-Plug 'romainl/vim-cool'
-
-"Smooth scrolling done right
-" attention remap S-Up etc.. conflicts my own window remapped moves
-Plug 'psliwka/vim-smoothie'
-
-"git wrapper(dependency)+ git log viewer
-"Plug 'tpope/vim-fugitive'
-"Plug 'junegunn/gv.vim'
-
-"tabularize, align operators.
-" godlygeek oldest
-" junegunn cites godlygeek, it's hyper configurable
-" tommcdo made sneak + it's simple
-Plug 'godlygeek/tabular'
-"Plug 'junegunn/vim-easy-align'
-Plug 'tommcdo/vim-lion'
-
-"fast motion F f T t but with s S 
-Plug 'justinmk/vim-sneak'
-
-"MORE text objects
-"engine, to create text-obj
-Plug 'kana/vim-textobj-user'
-
-"TEXTOBJ INSTANCES,PLUGINS,ADDITIONS
-"usage : ii, ai , iI, aI
-Plug 'kana/vim-textobj-indent'
-
-"A convenient text object for last pasted text
-"Convenience for `[v`] : aP
-Plug 'saaguero/vim-textobj-pastedtext'
-
-"select parameters of functions : 'a,'  (super inutile en ML LOL)
-"Plug 'sgur/vim-textobj-parameter'
-
-"Text objects for entire buffer : ie, ae
-Plug 'kana/vim-textobj-entire'
-
-"Text objects for continuity space : iS, aS
-Plug 'saihoooooooo/vim-textobj-space'
-
-"Text objects for a comment but not nesting, buggy. ac, ic
-"Plug 'thinca/vim-textobj-comment'
-"Plug 'glts/vim-textobj-comment'
-
-
-"Commentary all modes : gc
-"can be done a mano:)))))
-"Plug 'tpope/vim-commentary'
-
-"The set of operator and textobject plugins to search/select/edit sandwiched textobjects.
-"voir configuration pour ce textobj
-"Plug 'machakann/vim-sandwich'
-
-"directory viewer
-Plug 'justinmk/vim-dirvish'
-
-"directory viewer async
-"Easter egg
-"Plug 'thinca/vim-portal'
-
-"Enhanced multi-file search for Vim, old, twice vim-grepper
-"Plug 'wincent/ferret'
-
-"Use RipGrep in Vim and display results in a quickfix list
-"Very very simple. 
-"Plug 'jremmen/vim-ripgrep'
-
-"Helps you win at grep.
-Plug 'mhinz/vim-grepper'
-
-"Land on window you chose like tmux's 'display-pane' | Useless ?
-"Plug 't9md/vim-choosewin'
-
-"Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-"Plug 'junegunn/fzf.vim'
-
-"creates new modifiable buffer off quickfix and save to map changes wherever
-Plug 'thinca/vim-qfreplace'
-"in-quickfix filter
-Plug 'sk1418/QFGrep'
-" vim-qfedit enables you to edit the qf list freely as if it were a normal
-" buffer. BREAKS QF IN VIM-GREPPER ? Weird behaviour for normal mode anyway
-"Plug 'itchyny/vim-qfedit'
-
-
-"Elegant buffer explorer - takes very little screen space
-Plug 'weynhamz/vim-plugin-minibufexpl'
-
-"BufExplorer
-Plug 'jlanzarotta/bufexplorer'
+" === PERFORM ALL YOUR VIM INSERT MODE COMPLETIONS WITH TAB
+"Plug 'ervandew/supertab'
 
 "Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 "Plug 'https://github.com/copy/deoplete-ocaml'
 
+
 "Plug 'https://github.com/dense-analysis/ale'
 
-"completion
 Plug 'https://github.com/ajh17/VimCompletesMe'
 
-"Haskell completion engine
 Plug 'https://github.com/eagletmt/neco-ghc'
 
-" === SLOW ?? OU FSHARP ?? CACAACACA !
-" === C'EST AU CHARGEMENT POUR F#
 "Plug 'fsharp/vim-fsharp', {
 "      \ 'for': 'fsharp',
 "      \ 'do':  'make fsautocomplete',
 "      \}
 
+" === SLOW ?? OU FSHARP ?? CACAACACA !
+" === C'EST AU CHARGEMENT POUR F#
+"Plug 'vim-syntastic/syntastic'
+
+" === DÉPENDANCE POUR SYNTASTIC ??
+"Plug 'tpope/vim-fugitive'
+
 " === RAINBOW PARENTHESIS FOR LISP ()()()((((())()(()))))
 "Plug 'amdt/vim-niji'
-Plug 'kien/rainbow_parentheses.vim'
+"Plug 'kien/rainbow_parentheses.vim'
 
 
+" === FAST MOTION ===
+"Plug 'easymotion/vim-easymotion'
 
 " === OCAML, integration of ocp-indent ===
 " doesn't it conflict with neoformat ??
@@ -151,7 +73,7 @@ Plug 'kien/rainbow_parentheses.vim'
 " === utilise ocamlformat et ocp-indent pour formater
 Plug 'sbdchd/neoformat'
 
-" === OCAML            vim-ocaml syntax files for vim/neovim
+" === vim-ocaml syntax files for vim/neovim
 Plug 'ocaml/vim-ocaml'
 
 " === LSP Language Server Protocol support
@@ -160,8 +82,9 @@ Plug 'autozimu/LanguageClient-neovim', {
     \ 'do': 'bash install.sh',
     \ }
 
-" === FSHARP            (dépend binaires ds le PATH)
-" ide, incomplet, dépendance à configurer
+" (Optional) Multi-entry selection UI.
+" Plug 'junegunn/fzf'
+
 Plug 'ionide/Ionide-vim', {
       \ 'do':  'make fsautocomplete',
       \}
@@ -171,30 +94,21 @@ Plug 'ionide/Ionide-vim', {
 ""superseded by neoformat""Plug 'alx741/vim-hindent'
 
 " toggles jaspervdj/stylish-haskell, bufAutCmd etc
-" manual shortcut, set to do nothing on save (disabled)
-Plug 'alx741/vim-stylishask'
-""superseded by neoformat"
-"another one
-"Plug 'nbouscal/vim-stylish-haskell'
-
-"idem
-Plug 'alx741/vim-hindent'
+"Plug 'alx741/vim-stylishask'
+""superseded by neoformat""Plug 'nbouscal/vim-stylish-haskell'
 
 " [pourri] LSP client, haskell plugins pref
 "Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 
+" (Optional) Multi-entry selection UI.
+"Plug 'junegunn/fzf'
+
+
 " ghcid buffer for neovim, broken , :Ghcid -c \\"stack repl" , wtf ?
 "Plug 'ndmitchell/ghcid', { 'rtp': 'plugins/nvim' }
 
-" === HASKELL syntax files       (dépend nombreux binaires ds le PATH)
-" indentation , syntax files
 Plug 'neovimhaskell/haskell-vim'
-
-"funky bonus haskell
-"Plug 'eagletmt/ghcmod-vim'
-"Plug 'Shougo/vimproc.vim', {'do' : 'make'}
-
 
 
 " Initialize plugin system
@@ -202,73 +116,12 @@ call plug#end()
 
 "=== END OF PLUGS
 
+
 " Always draw the signcolumn.
 set signcolumn=yes
 
 "from vimcompletesme
 set completeopt+=longest
-
-" set relativenumber
-set number
-
-let mapleader = ","
-
-
-let g:fzf_preview_window = ''
-
-
-" CONFIG choosewin
-" invoke with '-'
-"nmap  +  <Plug>(choosewin)
-" if you want to use overlay feature
-"let g:choosewin_overlay_enable = 1
-
-
-let g:FerretQFOptions=0
-let g:FerretMap = 0
-let g:FerretQFMap = 0
-
-"let g:lion_squeeze_spaces = 0
-"let g:lion_map_right = 'gl'
-"let g:lion_map_left = 'gL'
-
-"text objects all plugins
-"let g:vim_textobj_parameter_mapping = ','
-let g:pastedtext_select_key = 'aP'
-let g:textobj_sandwich_no_default_key_mappings = 1
-"omap ix <Plug>(textobj-sandwich-auto-i)
-"xmap ix <Plug>(textobj-sandwich-auto-i)
-"omap ax <Plug>(textobj-sandwich-auto-a)
-"xmap ax <Plug>(textobj-sandwich-auto-a)
-
-
-"niji rainbow lisp plugin
-let g:niji_use_legacy_colours = 1
-
-
-"vim-grepper
-" -buffer, -buffers
-nnoremap <leader>* :Grepper -tool rg -cword -noprompt -buffer<cr>
-nnoremap <leader>g :Grepper -tool rg -buffer<cr>
-nnoremap <leader>G :Grepper -tool rg<cr>
-nmap gs <plug>(GrepperOperator)
-xmap gs <plug>(GrepperOperator)
-
-" Optional. The default behaviour should work for most users.
-let g:grepper               = {}
-let g:grepper.tools         = ['rg','git']
-let g:grepper.operator      = {}
-let g:grepper.operator.buffer = 1
-"let g:grepper.simple_prompt = 1
-"let g:grepper.highlight     = 1
-
-
-
-
-" itchyny/vim-qfedit toggle, defaults to 1
-"let g:qfedit_enable	= 0
-
-
 
 
 let g:haskell_enable_quantification = 1   " to enable highlighting of `forall`
@@ -287,19 +140,13 @@ let g:haskell_classic_highlighting = 1
 "let g:haskell_indent_in = 1
 "let g:haskell_indent_guard = 2
 
-"FAST MOTION
-let g:sneak#label = 1
-let g:sneak#use_ic_scs = 1
-let g:sneak#target_labels = ";sftunq/SFGHLTUNRMQZ?0éèçà§œŒù¹²"
+
 
 "DEBUGGING VARIABLES, DEBUG MODE FOR NVIM
  " only affects the verbosity of Neoformat
 "let g:neoformat_verbose = 1
 " also increases verbosity of the editor as a whole
-"let &verbose            = 1
-" necoghc diagnosis via :necoghcdiag<tab>
-"let g:necoghc_debug = 1
-
+let &verbose            = 1
 
 let g:neoformat_ocaml_ocamlformat = {
             \ 'exe': 'ocamlformat',
@@ -396,7 +243,9 @@ let g:fsharp_map_fsiinput = 'l'
 let g:fsharp_map_fsisendline = 'e'
 let g:fsharp_map_fsisendsel = 'e'
 
-
+" manual plugin_activated indentation (conflicts with neoformat)
+let g:stylishask_on_save = 0
+let g:hindent_on_save = 0
 
 "let g:LanguageClient_serverCommands = { 'haskell': ['hie-wrapper', '--lsp'] }
 "let g:LanguageClient_settingsPath = \"""/home/milvi/.hie_settings.json"
@@ -420,6 +269,8 @@ nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
 "nnoremap <silent> gf :call LanguageClient#textDocument_formatting()<CR>
 
 
+" my own tweaks
+"
 " recommended by Syntastic plugin but how does it do ? 
 "set statusline+=%#warningmsg#
 "set statusline+=%{SyntasticStatuslineFlag()}
@@ -508,6 +359,7 @@ if has('langmap') && exists('+langnoremap')
   set langnoremap
 endif
 
+
 " Moving lines up or down 
 " In normal mode or in insert mode, press Alt-j to move the current line down, or press Alt-k to move the current line up.
 nnoremap <C-j> :m .+1<CR>==
@@ -517,7 +369,10 @@ inoremap <C-k> <Esc>:m .-2<CR>==gi
 vnoremap <C-j> :m '>+1<CR>gv=gv
 vnoremap <C-k> :m '<-2<CR>gv=gv
 
+" set relativenumber
+set number
 
+let mapleader = ","
 
 " Clean Search
 "elle existe déjà" command C let @/=""
@@ -528,7 +383,7 @@ map <Leader>i mzgg=G`z
 " Switch between Vim window splits easily
 " Alt+arrow Navigation
 " Alt+leftarrow will go one window left, etc.
-" Alt-* = A-* et Maj/Shift = S-*
+" Alt A-* Shift S-*
 nmap <silent> <A-Up> :wincmd k<CR>
 nmap <silent> <A-Down> :wincmd j<CR>
 nmap <silent> <A-Left> :wincmd h<CR>
@@ -540,10 +395,10 @@ nmap <silent> <A-Right> :wincmd l<CR>
 "map <F5> <C-W>_<C-W><Bar>
 
 "highlight current line
-nnoremap <Leader>c :set cursorline!<CR>
+nnoremap <Leader>l :set cursorline!<CR>
 
 " voir hi ColorColumn
-set colorcolumn=86
+set colorcolumn=84
 
 " :noh
 " or :nohlsearch to temporarily disable search highlighting until the next search.
@@ -561,7 +416,7 @@ set colorcolumn=86
 " set hlsearch!
 " ...
 " nnoremap <F3> :set hlsearch!<CR>
-nnoremap <Leader>h :nohlsearch<CR>
+nnoremap <Leader>n :nohlsearch<CR>
 
 " remapped Shift-Tab so I could easily insert real tabs at the beginning of the line
 "inoremap <S-Tab> <C-V><Tab>
@@ -662,28 +517,26 @@ set fillchars-=vert:\| | set fillchars+=vert:\
 
 "=== CHAR SWAPPING ===
 "To use gc to swap the current character with the next, without changing the cursor position:
-nnoremap <silent> gr xph
-nnoremap <silent> gR Xp
+nnoremap <silent> gc xph
 
 "To use gw to swap the current word with the next, without changing cursor position
-"nnoremap <silent> gw "_yiw:s/\(\%#\w\+\)\(\_W\+\)\(\w\+\)/\3\2\1/<CR><c-o><c-l>:nohlsearch<CR>
+nnoremap <silent> gw "_yiw:s/\(\%#\w\+\)\(\_W\+\)\(\w\+\)/\3\2\1/<CR><c-o><c-l>:nohlsearch<CR>
 
 "To use gl to swap the current word with the previous, keeping cursor on current word
-"nnoremap <silent> gl "_yiw?\w\+\_W\+\%#<CR>:s/\(\%#\w\+\)\(\_W\+\)\(\w\+\)/\3\2\1/<CR><c-o><c-l>:nohlsearch<CR>
+nnoremap <silent> gl "_yiw?\w\+\_W\+\%#<CR>:s/\(\%#\w\+\)\(\_W\+\)\(\w\+\)/\3\2\1/<CR><c-o><c-l>:nohlsearch<CR>
 
 "To use gr to swap the current word with the next, keeping cursor on current word
-"nnoremap <silent> gr "_yiw:s/\(\%#\w\+\)\(\_W\+\)\(\w\+\)/\3\2\1/<CR><c-o>/\w\+\_W\+<CR><c-l>:nohlsearch<CR>
+nnoremap <silent> gr "_yiw:s/\(\%#\w\+\)\(\_W\+\)\(\w\+\)/\3\2\1/<CR><c-o>/\w\+\_W\+<CR><c-l>:nohlsearch<CR>
 
 "To use g{ to swap the current paragraph with the next:
-"nnoremap g{ {dap}p{
+nnoremap g{ {dap}p{
 ""For ISO/IEC_8859-1 Latin-1 Supplement characters, substitute all \w instances with [0-9A-Za-zÀ-ÖØ-öø-ÿ_] and all  \_W instances with \_[^0-9A-Za-zÀ-ÖØ-öø-ÿ_]
 
 
 " To use this mapping: first, delete,?yank a piece of texte. Then, use visual
 " mode to select some other text piece, and press Ctrl-X. The two pieces of 
 " text should then be swapped.
-" LOOOL broken. ça marche que sur un delete le retour `.
-"vnoremap <C-X> <Esc>`.``gvP``P
+vnoremap <C-X> <Esc>`.``gvP``P
 
 
 " delete without yanking
@@ -773,7 +626,6 @@ vmap <silent>[I :<C-u>cal OSearch("vl")<CR>
 "No registers are changed.
 "
 " Search for selected text, forwards or backwards.
-" wtf ? c'est pas déjà en natif ça ?
 vnoremap <silent> * :<C-U>
   \let old_reg=getreg('"')<Bar>let old_regtype=getregtype('"')<CR>
   \gvy/<C-R><C-R>=substitute(
@@ -830,6 +682,8 @@ execute "set rtp+=" . g:opamshare . "/merlin/vim"
 
 
 "set rtp^="/home/milvi/.opam/system/share/ocp-indent/vim"
+" opamshare previously definied
+" pour tout opam switch env
 execute "set rtp^=" . g:opamshare . "/ocp-indent/vim"
 "autocmd FileType ocaml source /home/milvi/.opam/system/share/ocp-indent/vim/indent/ocaml.vim
 
@@ -849,12 +703,12 @@ let g:syntastic_haskell_checkers = ['']
 
 let maplocalleader="\_"
 
+"au Syntax ocaml runtime! syntax/ocaml.vim
 
 
 "neoformat key binding
 nnoremap <leader>f :Neoformat<CR>
-"can't format intervals it's broken. useless mapping
-vnoremap <silent> <leader>f :Neoformat<CR>
+"can't format intervals"vnoremap <silent> <leader>f :Neoformat<CR>
 
 "Fsharp tooltips (show)
 " set updatetime=<ms>    
@@ -866,76 +720,13 @@ if has('nvim') && exists('*nvim_open_win')
   augroup END
 endif
 
-"let g:necoghc_debug = 1
-
+let g:necoghc_debug = 1
 " Disable haskell-vim omnifunc
-let g:haskellmode_completion_ghc = 0
-"[broken by autozimu redefinition] 
-"won't work but for show
-autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
-"has to be manually reinvoked
+"let g:haskellmode_completion_ghc = 0
 autocmd FileType haskell nnoremap <buffer> <localleader>c :setlocal omnifunc=necoghc#omnifunc<CR>
 
-"how to enable neco-ghc with VimCompletesMe
-"(woops, wrong plugin!)let g:ycm_semantic_triggers = {'haskell' : ['.']}
-"autocmd Filetype haskell let b:vcm_tab_complete = 'omni'
-let b:vcm_tab_complete = 'omni'
-"neco_ghc broken ?? wtf . pourquoi j'ai fait ce commentaire ? sur vcm ???
-
-
-" autocmd FileType haskell OU à-la-main échoue.
-" LanguageClient fait omnifunc=LanguageClient#complete
 "if (&ft=='haskell')
 "    :setlocal omnifunc=necoghc#omnifunc
 "endif
-
-" disables automatic indent on file save (plugin behaviour)
-" and it conflicts with neoformat !
-let g:stylishask_on_save = 0
-let g:hindent_on_save = 0
-
-au Filetype haskell nnoremap <silent> <localleader>h :Hindent<CR>
-au Filetype haskell nnoremap <silent> <localleader>s :Stylishask<CR>
-
-
-
-nmap <leader>= :Tabularize /=<CR>
-nmap <leader>- :Tabularize /-><CR>
-nmap <leader># :Tabularize /#-}<CR>
-nmap <leader>: :Tabularize /::<CR>
-vmap <leader>= :Tabularize /=<CR>
-vmap <leader>- :Tabularize /-><CR>
-vmap <leader># :Tabularize /#-}<CR>
-vmap <leader>: :Tabularize /::<CR>
-
-
-"map <silent> ti :GhcModTypeInsert<CR>
-"map <silent> tc :GhcModSplitFunCase<CR>
-"map <silent> tq :GhcModeType<CR>
-"map <silent> te :GhcModeTypeClear<CR>
-
-
-
-"The \%V atom will restrict a pattern so that it matches only inside the visual selection e.g. 
-"music amuse fuse refuse 
-"Visual select 'amuse fuse'
-":s/\%Vus/az/g
-"music amaze faze refuse
-"In order to actually search within the visual selection, you will need to use the \%V atom
-vnoremap <M-/> <Esc>/\%V
-nnoremap <M-/> /\%V
-
-nnoremap [b :bprevious
-nnoremap [B :bfirst
-nnoremap ]b :bnext
-nnoremap ]B :blast
-nnoremap [l :lprevious
-nnoremap [L :lfirst
-nnoremap ]l :lnext
-nnoremap ]L :llast
-nnoremap [q :cprevious
-nnoremap [Q :cfirst
-nnoremap ]q :cnext
-nnoremap ]Q :clast
 
 " FIN
