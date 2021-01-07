@@ -454,7 +454,7 @@ let g:fsharp_map_fsisendsel = 'e'
 let g:LanguageClient_rootMarkers = ['*.cabal', 'stack.yaml', 'package.yaml', 'package.json', '.merlin']
 let g:LanguageClient_serverCommands = {
     \ 'rust': ['rls'],
-    \ 'haskell': ['ghcide', '--lsp'],
+    \ 'haskell': ['haskell-language-server-wrapper', '--lsp'],
     \ 'ocaml': ['ocamllsp'],
     \ }
 
@@ -464,7 +464,7 @@ nnoremap <F5> :call LanguageClient_contextMenu()<CR>
 nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
 nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
 nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
-"nnoremap <silent> gf :call LanguageClient#textDocument_formatting()<CR>
+nnoremap <silent> gf :call LanguageClient#textDocument_formatting()<CR>
 
 
 " recommended by Syntastic plugin but how does it do ? 
@@ -941,7 +941,7 @@ let b:vcm_tab_complete = 'omni'
 let g:stylishask_on_save = 0
 let g:hindent_on_save = 0
 
-au Filetype haskell nnoremap <silent> <localleader>h :Hindent<CR>
+au Filetype haskell nnoremap <silent> <localleader>i :Hindent<CR>
 au Filetype haskell nnoremap <silent> <localleader>s :Stylishask<CR>
 
 
