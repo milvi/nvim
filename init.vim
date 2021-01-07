@@ -116,7 +116,7 @@ Plug 'sk1418/QFGrep'
 
 
 "Elegant buffer explorer - takes very little screen space
-Plug 'weynhamz/vim-plugin-minibufexpl'
+"Plug 'fholgado/minibufexpl'
 
 "BufExplorer
 Plug 'jlanzarotta/bufexplorer'
