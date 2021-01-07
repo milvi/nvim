@@ -1,6 +1,8 @@
 set termguicolors
 
 set clipboard+=unnamedplus,unnamed
+"vim :help autoselect :help unnamedplus :help quotestar :help clipboard
+"nvim ..
 
 " === SHOW MATCH PAREN AND SET DELAY
 set showmatch
@@ -138,10 +140,10 @@ Plug 'https://github.com/eagletmt/neco-ghc'
 "      \}
 
 " === RAINBOW PARENTHESIS FOR LISP ()()()((((())()(()))))
-"Plug 'amdt/vim-niji'
-Plug 'kien/rainbow_parentheses.vim'
+Plug 'amdt/vim-niji'
+"Plug 'kien/rainbow_parentheses.vim'
 
-
+Plug 'https://github.com/wlangstroth/vim-racket'
 
 " === OCAML, integration of ocp-indent ===
 " doesn't it conflict with neoformat ??
@@ -195,6 +197,8 @@ Plug 'neovimhaskell/haskell-vim'
 "Plug 'eagletmt/ghcmod-vim'
 "Plug 'Shougo/vimproc.vim', {'do' : 'make'}
 
+"send selection to an REPL in some terminal
+"Plug 'https://github.com/jpalardy/vim-slime'
 
 
 " Initialize plugin system
@@ -243,8 +247,43 @@ let g:textobj_sandwich_no_default_key_mappings = 1
 
 
 "niji rainbow lisp plugin
-let g:niji_use_legacy_colours = 1
+"let g:niji_use_legacy_colours = 1
+"let g:niji_always_highlight = [
+"    \ [ '81', '#5fd7ff'],
+"    \ [ '99', '#875fff'],
+"    \ [ '1',  '#dc322f'],
+"    \ [ '76', '#5fd700'],
+"    \ [ '3',  '#b58900'],
+"    \ [ '2',  '#859900'],
+"    \ [ '6',  '#2aa198'],
+"    \ [ '4',  '#268bd2'],
+"    \ ]
 
+"let g:niji_always_highlight = [
+"    \ [33, 'blue'      ],
+"    \ [37, 'cyan'      ],
+"    \ [61, 'brmagenta' ],
+"    \ [125, 'magenta'  ],
+"    \ [136, 'yellow'   ],
+"    \ [160, 'red'      ],
+"    \ [166, 'brred'    ]]
+
+let g:niji_always_highlight = [['brown', 'brown'],
+                    \ ['Darkblue', 'Darkblue'],
+                    \ ['darkgray', 'darkgray'],
+                    \ ['darkgreen', 'darkgreen'],
+                    \ ['darkcyan', 'darkcyan'],
+                    \ ['darkred', 'darkred'],
+                    \ ['darkmagenta', 'darkmagenta'],
+                    \ ['brown', 'brown'],
+                    \ ['gray', 'gray'],
+                    \ ['black', 'black'],
+                    \ ['darkmagenta', 'darkmagenta'],
+                    \ ['Darkblue', 'Darkblue'],
+                    \ ['darkgreen', 'darkgreen'],
+                    \ ['darkcyan', 'darkcyan'],
+                    \ ['darkred', 'darkred'],
+                    \ ['red', 'red']]
 
 "vim-grepper
 " -buffer, -buffers
@@ -300,7 +339,8 @@ let g:sneak#target_labels = ";sftunq/SFGHLTUNRMQZ?0éèçà§œŒù¹²"
 " necoghc diagnosis via :necoghcdiag<tab>
 "let g:necoghc_debug = 1
 
-
+"neoformat bug undo history undojoin
+"voir documentation
 let g:neoformat_ocaml_ocamlformat = {
             \ 'exe': 'ocamlformat',
             \ 'no_append': 1,
@@ -312,6 +352,13 @@ let g:neoformat_ocaml_ocamlformat = {
 let g:neoformat_enabled_ocaml = ['ocamlformat']
 " si non défini, le premier trouvé ou erreur
 let g:neoformat_enabled_haskell = ['ormolu']
+
+let g:neoformat_racket_scmindent = {
+            \ 'exe': 'scmindent.rkt',
+            \ 'stdin': 1,
+            \ }
+
+let g:neoformat_enabled_racket = ['scmindent']
 
 "let g:ormolu_ghc_opt=["TypeApplications", \\\\\\\""""\"RankNTypes"]
 
@@ -937,5 +984,10 @@ nnoremap [q :cprevious
 nnoremap [Q :cfirst
 nnoremap ]q :cnext
 nnoremap ]Q :clast
+
+"lisp, scheme, racket autoindent beautify : voir neoformat integration
+autocmd filetype lisp,scheme,racket setlocal equalprg=scmindent.rkt
+
+let g:slime_target = "neovim"
 
 " FIN
