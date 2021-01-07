@@ -132,12 +132,6 @@ Plug 'https://github.com/ajh17/VimCompletesMe'
 "Haskell completion engine
 Plug 'https://github.com/eagletmt/neco-ghc'
 
-" === SLOW ?? OU FSHARP ?? CACAACACA !
-" === C'EST AU CHARGEMENT POUR F#
-"Plug 'fsharp/vim-fsharp', {
-"      \ 'for': 'fsharp',
-"      \ 'do':  'make fsautocomplete',
-"      \}
 
 " === RAINBOW PARENTHESIS FOR LISP ()()()((((())()(()))))
 Plug 'amdt/vim-niji'
@@ -162,8 +156,7 @@ Plug 'autozimu/LanguageClient-neovim', {
     \ 'do': 'bash install.sh',
     \ }
 
-" === FSHARP            (dépend binaires ds le PATH)
-" ide, incomplet, dépendance à configurer
+" === FSHARP  (dépendances avec les binaires : Fantomas + FSharpLint !)
 Plug 'ionide/Ionide-vim', {
       \ 'do':  'make fsautocomplete',
       \}
@@ -411,47 +404,12 @@ let g:airline_highlighting_cache = 1
 let g:airline#extensions#branch#format = 2
 
 
-" === F# FSHARP CONFIG === (DEFAULT_ARG)
-" By default your F# files will be syntax/type checked on every open/save of a vim buffer as well as after 500ms of inactivity in Normal mode. 
-" In case you would prefer not to have you errors checked continuously add the following to your vimrc (0)
-"let g:fsharp_only_check_errors_on_write = 1
+let g:LanguageClient_rootMarkers = {
+    \ 'haskell': ['*.cabal', 'stack.yaml', 'cabal.project', 'package.yaml'],
+    \ 'ocaml' : ['package.json', '.merlin'],
+    \ }
+"ionide-fsharp ajoute lui même la clé 'fsharp'
 
-" In case you prefer to disable the syntax checker, add the following to your vimrc ('syntax')
-"let g:syntastic_fsharp_checkers = ['']
-
-" If you find the default bindings unsuitable then it is possible to turn them off (1)
-"let g:fsharp_map_keys = 0
-
-" Automatically open the result of an FsiEval (fsi-out buffer) in a vsplit window (0)
-"let g:fsharp_fsi_show_auto_open = 1
-
-" This sets maps hereafter in a if directive.
-" If you find the default bindings unsuitable then it is possible to turn them off. (1)
-"let g:fsharp_map_keys = 0
-
-" === Overrides the default mappings ===
-
-
-" Override the default prefix of <leader>
-"let g:fsharp_map_prefix = 'cp'
-let g:fsharp_map_typecheck = 't'
-let g:fsharp_map_typehelp = 'h'
-let g:fsharp_map_gotodecl = 'g'
-let g:fsharp_map_gobackfromdecl = 'b'
-let g:fsharp_map_fsiinput = 'l'
-"
-let g:fsharp_map_fsisendline = 'e'
-let g:fsharp_map_fsisendsel = 'e'
-
-
-
-"let g:LanguageClient_serverCommands = { 'haskell': ['hie-wrapper', '--lsp'] }
-"let g:LanguageClient_settingsPath = \"""/home/milvi/.hie_settings.json"
-"let g:LanguageClient_rootMarkers = {                                      
-"         \ 'haskell': ['*.cabal','stack.yaml','cabal.project','package.yaml']                                          
-"         \ }
-
-let g:LanguageClient_rootMarkers = ['*.cabal', 'stack.yaml', 'package.yaml', 'package.json', '.merlin']
 let g:LanguageClient_serverCommands = {
     \ 'rust': ['rls'],
     \ 'haskell': ['haskell-language-server-wrapper', '--lsp'],
@@ -903,7 +861,8 @@ nnoremap <leader>f :Neoformat<CR>
 "can't format intervals it's broken. useless mapping
 vnoremap <silent> <leader>f :Neoformat<CR>
 
-"Fsharp tooltips (show)
+"Fsharp ionide-vim
+"Show tooltips on CursorHold
 " set updatetime=<ms>    
 " default to 4s
 if has('nvim') && exists('*nvim_open_win')
