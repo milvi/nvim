@@ -74,6 +74,8 @@ Plug 'saihoooooooo/vim-textobj-space'
 "Plug 'thinca/vim-textobj-comment'
 "Plug 'glts/vim-textobj-comment'
 
+" A text object for Haskell's do-notation.
+Plug 'danidiaz/vim-textobj-do-block'
 
 "Commentary all modes : gc
 "can be done a mano:)))))
@@ -192,6 +194,16 @@ Plug 'neovimhaskell/haskell-vim'
 
 "send selection to an REPL in some terminal
 Plug 'https://github.com/jpalardy/vim-slime'
+
+" vim-fetch enables Vim to process line and column jump specifications in file paths as found in stack traces and similar output. When asked to open such a file, in- or outside Vim or via gF, Vim with vim-fetch will jump to the specified line (and column, if given) instead of displaying an empty, new file
+"Plug 'wsdjeg/vim-fetch'
+
+" API,plugin pair, compilation failed
+" API for haskell neovim plugins
+"Plug 'neovimhaskell/nvim-hs.vim'
+" and the Ghcid quickfix hook
+"Plug 'saep/nvim-hs-ghcid'
+
 
 
 " Initialize plugin system
@@ -972,5 +984,13 @@ let g:slime_target = "neovim"
 :nnoremap <M-j> <C-w>j
 :nnoremap <M-k> <C-w>k
 :nnoremap <M-l> <C-w>l
+
+
+"quickfix format for ghcid output
+"autocmd FileType haskell set errorformat=%C%*\\s•\ %m,
+"               \%-C\ %.%#,
+"               \%A%f:%l:%c:\ %t%.%#
+
+
 
 " FIN
