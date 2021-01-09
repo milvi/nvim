@@ -177,32 +177,14 @@ Plug 'alx741/vim-stylishask'
 "idem
 Plug 'alx741/vim-hindent'
 
-" [pourri] LSP client, haskell plugins pref
-"Plug 'neoclide/coc.nvim', {'branch': 'release'}
-
-
-" ghcid buffer for neovim, broken , :Ghcid -c \\"stack repl" , wtf ?
-"Plug 'ndmitchell/ghcid', { 'rtp': 'plugins/nvim' }
 
 " === HASKELL syntax files       (dépend nombreux binaires ds le PATH)
 " indentation , syntax files
 Plug 'neovimhaskell/haskell-vim'
 
-"funky bonus haskell
-"Plug 'eagletmt/ghcmod-vim'
-"Plug 'Shougo/vimproc.vim', {'do' : 'make'}
 
 "send selection to an REPL in some terminal
 Plug 'https://github.com/jpalardy/vim-slime'
-
-" vim-fetch enables Vim to process line and column jump specifications in file paths as found in stack traces and similar output. When asked to open such a file, in- or outside Vim or via gF, Vim with vim-fetch will jump to the specified line (and column, if given) instead of displaying an empty, new file
-"Plug 'wsdjeg/vim-fetch'
-
-" API,plugin pair, compilation failed
-" API for haskell neovim plugins
-"Plug 'neovimhaskell/nvim-hs.vim'
-" and the Ghcid quickfix hook
-"Plug 'saep/nvim-hs-ghcid'
 
 
 
@@ -986,10 +968,7 @@ let g:slime_target = "neovim"
 :nnoremap <M-l> <C-w>l
 
 
-"quickfix format for ghcid output
-"autocmd FileType haskell set errorformat=%C%*\\s•\ %m,
-"               \%-C\ %.%#,
-"               \%A%f:%l:%c:\ %t%.%#
+
 
 
 
