@@ -187,7 +187,6 @@ Plug 'neovimhaskell/haskell-vim'
 Plug 'https://github.com/jpalardy/vim-slime'
 
 
-
 " Initialize plugin system
 call plug#end()
 
