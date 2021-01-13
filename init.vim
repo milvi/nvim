@@ -948,7 +948,6 @@ let g:slime_target = "neovim"
 "To simulate |i_CTRL-R| in terminal-mode:
 :tnoremap <expr> <C-R> '<C-\><C-N>"'.nr2char(getchar()).'pi'
 
-
 " Alt key modifier is represented using <A-key> or <M-key> notation.
 " Ctrl key modifier -> <C-key>
 " Shift key modifier -> <S-key>
