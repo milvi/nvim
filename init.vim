@@ -48,6 +48,8 @@ Plug 'tommcdo/vim-lion'
 
 "fast motion F f T t but with s S 
 Plug 'justinmk/vim-sneak'
+"dépendance pour . (opérateur répétition) de vim-sneak
+"Plug 'tpope/vim-repeat'
 
 "MORE text objects
 "engine, to create text-obj
@@ -316,6 +318,11 @@ let g:haskell_classic_highlighting = 1
 let g:sneak#label = 1
 let g:sneak#use_ic_scs = 1
 let g:sneak#target_labels = ";sftunq/SFGHLTUNRMQZ?0éèçà§œŒù¹²"
+" operator-pending-mode
+" replaces z Z defaults due to third party compatibility plugin I don't care about
+" this is more coherent to have s S everywhere
+omap s <Plug>Sneak_s
+omap S <Plug>Sneak_S
 
 "DEBUGGING VARIABLES, DEBUG MODE FOR NVIM
  " only affects the verbosity of Neoformat
