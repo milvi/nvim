@@ -950,10 +950,10 @@ autocmd filetype lisp,scheme,racket setlocal equalprg=scmindent.rkt
 let g:slime_target = "neovim"
 
 "To map <Esc> to exit terminal-mode:
-:tnoremap <Esc> <C-\><C-n>
+tnoremap <Esc> <C-\><C-n>
 
 "To simulate |i_CTRL-R| in terminal-mode:
-:tnoremap <expr> <C-R> '<C-\><C-N>"'.nr2char(getchar()).'pi'
+tnoremap <expr> <C-R> '<C-\><C-N>"'.nr2char(getchar()).'pi'
 
 
 " Alt key modifier is represented using <A-key> or <M-key> notation.
@@ -961,22 +961,54 @@ let g:slime_target = "neovim"
 " Shift key modifier -> <S-key>
 
 "To use `ALT+{h,j,k,l}` to navigate windows from any mode:
-:tnoremap <M-h> <C-\><C-N><C-w>h
-:tnoremap <M-j> <C-\><C-N><C-w>j
-:tnoremap <M-k> <C-\><C-N><C-w>k
-:tnoremap <M-l> <C-\><C-N><C-w>l
-:inoremap <M-h> <C-\><C-N><C-w>h
-:inoremap <M-j> <C-\><C-N><C-w>j
-:inoremap <M-k> <C-\><C-N><C-w>k
-:inoremap <M-l> <C-\><C-N><C-w>l
-:nnoremap <M-h> <C-w>h
-:nnoremap <M-j> <C-w>j
-:nnoremap <M-k> <C-w>k
-:nnoremap <M-l> <C-w>l
+tnoremap <M-h> <C-\><C-N><C-w>h
+tnoremap <M-j> <C-\><C-N><C-w>j
+tnoremap <M-k> <C-\><C-N><C-w>k
+tnoremap <M-l> <C-\><C-N><C-w>l
+inoremap <M-h> <C-\><C-N><C-w>h
+inoremap <M-j> <C-\><C-N><C-w>j
+inoremap <M-k> <C-\><C-N><C-w>k
+inoremap <M-l> <C-\><C-N><C-w>l
+nnoremap <M-h> <C-w>h
+nnoremap <M-j> <C-w>j
+nnoremap <M-k> <C-w>k
+nnoremap <M-l> <C-w>l
+
+"Trimming whitespaces (syntax or match method) :
+highlight ExtraWhitespace ctermbg=red guibg=red
+"here, using Todo group
+
+" Show trailing whitepace:
+":autocmd Syntax * syn match Todo /\s\+$/
+
+"Vim 8 and later, you can use the matchadd() function to define matches (making the :match command available for other purposes)
+match Todo /\s\+$/
+autocmd BufWinEnter * match Todo /\s\+$/
+autocmd InsertEnter * match Todo /\s\+\%#\@<!$/
+autocmd InsertLeave * match Todo /\s\+$/
+autocmd BufWinLeave * call clearmatches()
+
+nnoremap <Leader>w :match Todo /\s\+$/<CR>
+nnoremap <Leader>W :match<CR>
+
+set listchars=extends:>,precedes:<,trail:·,tab:¦-
+"set list
+"set list! (toggle)
 
 
+fun! TrimWhitespace()
+  if !&binary && &filetype != 'diff'
+    let l:save = winsaveview()
+    keepjumps keeppatterns %s/\s\+$//e
+    call winrestview(l:save)
+  endif
+endfun
 
+command! TrimWhitespace call TrimWhitespace()
 
-
+"usage :TrimWhitespace
+"usage :call TrimWhitespace()
+"autocmd BufWritePre * :call TrimWhitespace()
+nnoremap <Leader>t :call TrimWhitespace()<CR>
 
 " FIN
