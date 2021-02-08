@@ -978,15 +978,16 @@ nnoremap <M-l> <C-w>l
 highlight ExtraWhitespace ctermbg=red guibg=red
 "here, using Todo group
 
-" Show trailing whitepace:
+" Show trailing whitepace using 'syntax':
 ":autocmd Syntax * syn match Todo /\s\+$/
 
 "Vim 8 and later, you can use the matchadd() function to define matches (making the :match command available for other purposes)
-match Todo /\s\+$/
-autocmd BufWinEnter * match Todo /\s\+$/
-autocmd InsertEnter * match Todo /\s\+\%#\@<!$/
-autocmd InsertLeave * match Todo /\s\+$/
-autocmd BufWinLeave * call clearmatches()
+"match Todo /\s\+$/
+"autocmd BufWinEnter * match Todo /\s\+$/
+"do not hi while typing:
+"autocmd InsertEnter * match Todo /\s\+\%#\@<!$/
+"autocmd InsertLeave * match Todo /\s\+$/
+"autocmd BufWinLeave * call clearmatches()
 
 nnoremap <Leader>w :match Todo /\s\+$/<CR>
 nnoremap <Leader>W :match<CR>
@@ -1008,7 +1009,7 @@ command! TrimWhitespace call TrimWhitespace()
 
 "usage :TrimWhitespace
 "usage :call TrimWhitespace()
-"autocmd BufWritePre * :call TrimWhitespace()
+autocmd BufWritePre * :call TrimWhitespace()
 nnoremap <Leader>t :call TrimWhitespace()<CR>
 
 " FIN
