@@ -46,7 +46,7 @@ Plug 'godlygeek/tabular'
 "Plug 'junegunn/vim-easy-align'
 Plug 'tommcdo/vim-lion'
 
-"fast motion F f T t but with s S 
+"fast motion F f T t but with s S
 Plug 'justinmk/vim-sneak'
 "dépendance pour . (opérateur répétition) de vim-sneak
 "Plug 'tpope/vim-repeat'
@@ -98,7 +98,7 @@ Plug 'justinmk/vim-dirvish'
 "Plug 'wincent/ferret'
 
 "Use RipGrep in Vim and display results in a quickfix list
-"Very very simple. 
+"Very very simple.
 "Plug 'jremmen/vim-ripgrep'
 
 "Helps you win at grep.
@@ -329,6 +329,8 @@ omap S <Plug>Sneak_S
 "let g:neoformat_verbose = 1
 " also increases verbosity of the editor as a whole
 "let &verbose            = 1
+"let g:LanguageClient_loggingLevel='DEBUG'
+"let g:LanguageClient_loggingFile =  expand('~/.local/share/nvim/LanguageClient.log')
 " necoghc diagnosis via :necoghcdiag<tab>
 "let g:necoghc_debug = 1
 
@@ -425,11 +427,11 @@ nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
 nnoremap <silent> gf :call LanguageClient#textDocument_formatting()<CR>
 
 
-" recommended by Syntastic plugin but how does it do ? 
+" recommended by Syntastic plugin but how does it do ?
 "set statusline+=%#warningmsg#
 "set statusline+=%{SyntasticStatuslineFlag()}
 "set statusline+=%*
-" .... and this .... 
+" .... and this ....
 let g:syntastic_always_populate_loc_list = 0
 let g:syntastic_auto_loc_list = 0
 let g:syntastic_check_on_open = 0
@@ -513,7 +515,7 @@ if has('langmap') && exists('+langnoremap')
   set langnoremap
 endif
 
-" Moving lines up or down 
+" Moving lines up or down
 " In normal mode or in insert mode, press Alt-j to move the current line down, or press Alt-k to move the current line up.
 nnoremap <C-j> :m .+1<CR>==
 nnoremap <C-k> :m .-2<CR>==
@@ -556,13 +558,13 @@ set colorcolumn=86
 "
 " :let @/ = ""
 " To turn off highlighting until the next search:
-" 
+"
 " :noh
 " Or turn off highlighting completely:
 "
 " set nohlsearch
 " Or, to toggle it:
-" 
+"
 " set hlsearch!
 " ...
 " nnoremap <F3> :set hlsearch!<CR>
@@ -575,11 +577,11 @@ set tabstop=4
 set expandtab
 " makes the spaces feel like real tabs
 "set softtabstop=4
-set shiftwidth=4 
+set shiftwidth=4
 
 " What would be the chances that your keyboard sends an accented letter instead of a ` followed by a character? – romainl Jan 10 '13 at 10:41
 " @romainl. That is exactly what is happening. The keyboard driver is trying to send an accented letter. So it works with `<Space><mark>. Thanks for the help. – Kei Jan 10 '13 at 17:34
-" FYI: vim-signature does remap this by default: n `] * :<C-U>call signature#mark#Goto("next", "spot", "alpha")<CR> – Keith Hughitt 
+" FYI: vim-signature does remap this by default: n `] * :<C-U>call signature#mark#Goto("next", "spot", "alpha")<CR> – Keith Hughitt
 
 " PEBKAV (Problem Exists Between Keyboard And Vim)
 
@@ -587,7 +589,7 @@ set shiftwidth=4
 " partial workaround
 nmap à `a
 nmap À `A
-" àèëËÊêêêèè`zèè en rappelant celles qui ne renvoient rien  [`r`b] vs clavier [``r``b] 
+" àèëËÊêêêèè`zèè en rappelant celles qui ne renvoient rien  [`r`b] vs clavier [``r``b]
 nmap è `e
 nmap È `E
 nmap ỳ `y
@@ -628,7 +630,7 @@ set backupcopy=yes
 set writebackup
 set backupdir=.,~/.local/share/nvim/backup
 
-"'backup' 'writebackup'	action	
+"'backup' 'writebackup'	action
 "   off	     off	no backup made
 "   off	     on		backup current file, deleted afterwards (default)
 "   on	     off	delete old backup, backup current file
@@ -658,7 +660,7 @@ set wildmode=longest,list
 " ^= prepends the value to a string list.
 
 " Vertical right delimiter, voir : hi VertSplit
-set fillchars-=vert:\| | set fillchars+=vert:\ 
+set fillchars-=vert:\| | set fillchars+=vert:\
 
 
 "automatically pairs string delimiter and position between them
@@ -685,7 +687,7 @@ nnoremap <silent> gR Xp
 
 
 " To use this mapping: first, delete,?yank a piece of texte. Then, use visual
-" mode to select some other text piece, and press Ctrl-X. The two pieces of 
+" mode to select some other text piece, and press Ctrl-X. The two pieces of
 " text should then be swapped.
 " LOOOL broken. ça marche que sur un delete le retour `.
 "vnoremap <C-X> <Esc>`.``gvP``P
@@ -702,8 +704,8 @@ vnoremap <leader>p "_dP
 " vnoremap j'ai mis xnoremaps d'après la doc
 " del,yank,change goes to "" et yank also goes to "0
 " "_ is the blackhole register, thus the unnamed register "" is untouched
-" 
-" yank,..then ..      c  then  <C-R>0 
+"
+" yank,..then ..      c  then  <C-R>0
 " yank and change by register |num|
 
 
@@ -762,7 +764,7 @@ vmap <silent>[I :<C-u>cal OSearch("vl")<CR>
 "simple and flawed
 "vnoremap // y/<C-R>"<CR>
 "
-"selected text is interpreted as regex, 
+"selected text is interpreted as regex,
 "thus . * etc must be escaped :
 "use of \V , aka "very no-magic"
 "vnoremap // y/\V<C-R>"<CR>
@@ -838,7 +840,7 @@ execute "set rtp+=" . g:opamshare . "/merlin/vim"
 execute "set rtp^=" . g:opamshare . "/ocp-indent/vim"
 "autocmd FileType ocaml source /home/milvi/.opam/system/share/ocp-indent/vim/indent/ocaml.vim
 
-" opam install ocp-index 
+" opam install ocp-index
 " set rtp+=/home/milvi/.opam/4.08.1/share/ocp-index/vim
 execute "set rtp+=" . g:opamshare . "/ocp-index/vim"
 
@@ -863,7 +865,7 @@ vnoremap <silent> <leader>f :Neoformat<CR>
 
 "Fsharp ionide-vim
 "Show tooltips on CursorHold
-" set updatetime=<ms>    
+" set updatetime=<ms>
 " default to 4s
 if has('nvim') && exists('*nvim_open_win')
   augroup FSharpShowTooltip
@@ -876,7 +878,7 @@ endif
 
 " Disable haskell-vim omnifunc
 let g:haskellmode_completion_ghc = 0
-"[broken by autozimu redefinition] 
+"[broken by autozimu redefinition]
 "won't work but for show
 autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
 "has to be manually reinvoked
@@ -922,8 +924,8 @@ vmap <leader>: :Tabularize /::<CR>
 
 
 
-"The \%V atom will restrict a pattern so that it matches only inside the visual selection e.g. 
-"music amuse fuse refuse 
+"The \%V atom will restrict a pattern so that it matches only inside the visual selection e.g.
+"music amuse fuse refuse
 "Visual select 'amuse fuse'
 ":s/\%Vus/az/g
 "music amaze faze refuse
